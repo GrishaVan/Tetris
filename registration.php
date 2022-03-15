@@ -17,6 +17,7 @@ session_start();
         </ul>
         <div class="main">
             <form method="POST" action="index.php">
+                <h2>Sign up:</h2>
                 <label for="firstName">First name:</label><br>
                 <input type="text" name="firstName" id="firstName" placeholder="e.g. Bob"><br>
                 <label for="lastName">Last name:</label><br>
@@ -27,12 +28,12 @@ session_start();
                 <input type="password" name="passowrd" id="password" placeholder="Password" required><br>
                 <label for="password">Confirm password:</label><br>
                 <input type="password" name="confPassowrd" id="confPassword" placeholder="Confirm password" required><br>
-                <label for="display">Display Scores on leaderboard</label><br>
+                <label for="display">Display Scores on leaderboard:</label><br>
                 <input type="radio" name="display" id="yes" value="yes" checked>
                 <label for="yes">Yes</label><br>
                 <input type="radio" name="display" id="no">
                 <labrl for="no">No</label><br>
-                <input type="submit" name="submit">
+                <input type="submit" name="submit" id="submit">
             </form>
         </div>
     </body>

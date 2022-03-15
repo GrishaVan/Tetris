@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION['name'] = $_POST['username'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +16,6 @@ $_SESSION['name'] = $_POST['username'];
             <li name="leaderbord"><a href="leaderbord.php">Leaderboard</a></li>
         </ul>
         <div class="main">
-            <img src="tetris.png" alt="error" id="back">
         </div>
     </body>
 </html>

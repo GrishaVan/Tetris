@@ -1,3 +1,14 @@
+div.main {
+    background-image: url("tetris.png");
+    display: block;
+    margin: auto;
+    height: 737px;
+    width: 95%;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
 ul.menu {
     list-style-type: none;
     padding: 0px;
@@ -36,4 +47,19 @@ div.main img#back {
 div.main form {
     background-color: grey;
     box-shadow: 5px 5px;
+    opacity: 95%;
+    width: 36%;
+    display: block;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -95%);
+}
+form > h2 {
+    text-align: center;
+}
+#submit {
+    width: 170px;
 }
