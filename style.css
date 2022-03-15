@@ -1,0 +1,39 @@
+ul.menu {
+    list-style-type: none;
+    padding: 0px;
+    background-color: blue;
+    overflow: hidden;
+}
+ul.menu li {
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: bold;
+    float: right;
+    display: block;
+    width: 5cm;
+    height: .7cm;
+    padding-top: 10px;
+    text-align: center;
+    border: 2px solid blue;
+}
+ul.menu li a {
+    text-decoration: none;
+    color: white;
+}
+ul.menu li#home{
+    float: left;
+}
+ul.menu li:hover {
+    transition-duration: 0.5s;
+    color: black;
+    background-color: white;
+}
+div.main img#back {
+    width: 95%;
+    display: block;
+    margin: auto;
+}
+div.main form {
+    background-color: grey;
+    box-shadow: 5px 5px;
+}
