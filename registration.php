@@ -16,8 +16,9 @@ session_start();
             <li name="leaderbord"><a href="leaderbord.php">Leaderboard</a></li>
         </ul>
         <div class="main">
-            <form method="POST" action="index.php">
+            <form method="POST" action="index.php" onsubmit="return passwordCheck();">
                 <h2>Sign up:</h2>
+                <p id="status"></p>
                 <label for="firstName">First name:</label><br>
                 <input type="text" name="firstName" id="firstName" placeholder="e.g. Bob"><br>
                 <label for="lastName">Last name:</label><br>
@@ -25,16 +26,17 @@ session_start();
                 <label for="username">Username:</label><br>
                 <input type="text" name="username" id="username" placeholder="e.g Booid" required><br>
                 <label for="password">Password:</label><br>
-                <input type="password" name="passowrd" id="password" placeholder="Password" required><br>
+                <input type="password" name="password" id="password" placeholder="Password" required><br>
                 <label for="password">Confirm password:</label><br>
-                <input type="password" name="confPassowrd" id="confPassword" placeholder="Confirm password" required><br>
+                <input type="password" name="confPassword" id="confPassword" placeholder="Confirm password" required><br>
                 <label for="display">Display Scores on leaderboard:</label><br>
                 <input type="radio" name="display" id="yes" value="yes" checked>
                 <label for="yes">Yes</label><br>
                 <input type="radio" name="display" id="no">
-                <labrl for="no">No</label><br>
+                <label for="no">No</label><br>
                 <input type="submit" name="submit" id="submit">
             </form>
+        <script src="checkPassword.js"></script>
         </div>
     </body>
 </html>
