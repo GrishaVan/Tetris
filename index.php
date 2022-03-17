@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (isset($_POST['username'])) {
+    $_SESSION['name'] = $_POST['username'];
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,6 +19,14 @@ session_start();
             <li name="leaderbord"><a href="leaderbord.php">Leaderboard</a></li>
         </ul>
         <div class="main">
+            <div id="login">
+                <script src="welcomeMessage.js"></script>
+                <?php
+                if (isset($_SESSION['name'])) {
+                    echo '<script>loggedin('.$_SESSION['name'].');</script>';
+                }
+                ?>
+            </div>
         </div>
     </body>
 </html>
