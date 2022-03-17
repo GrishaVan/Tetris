@@ -67,4 +67,9 @@ div#login {
     width: 500px;
     box-shadow: 5px 5px;
     text-align: center;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -95%);
 }
