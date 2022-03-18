@@ -1,3 +1,5 @@
+var messageStyle = "background-color: grey;width: 500px;box-shadow: 5px 5px;text-align: center;margin: auto;position: absolute;top: 50%;left: 50%;"
+
 function loggedin(name) {
     var div = document.getElementById("login");
     var header = document.createElement("h2");
@@ -12,4 +14,32 @@ function loggedin(name) {
     header.after(para);
     para.after(button);
     button.appendChild(hyper);
+    div.style.cssText = messageStyle + "transform: translate(-50%, -200%);";
+    console.log("Loghged in");
+}
+
+function signin() {
+    var div = document.getElementById("login");
+    var header = document.createElement("h2");
+    var br = document.createElement("br");
+    div.appendChild(header);
+    header.innerHTML = "Sign in";
+    var form = document.createElement("form");
+    form.setAttribute("method", "POST");
+    form.setAttribute("action", "index.php");
+    var username = document.createElement("input");
+    username.setAttribute("type", "text");
+    username.setAttribute("name", "logUser");
+    username.setAttribute("id", "logUser");
+    username.setAttribute("placeholder", "username");
+    var password = document.createElement("input");
+    password.setAttribute("type", "text");
+    password.setAttribute("name", "logPass");
+    password.setAttribute("id", "logPass");
+    password.setAttribute("placeholder", "password");
+    header.after(form);
+    form.appendChild(username);
+    username.after(password);
+    div.style.cssText = messageStyle + "transform: translate(-50%, -200%);";
+    console.log("Not logged in");
 }
