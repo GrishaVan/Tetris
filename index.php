@@ -24,6 +24,8 @@ if (isset($_POST['username'])) {
                 <?php
                 if (isset($_SESSION['name'])) {
                     echo '<script>loggedin('.$_SESSION['name'].');</script>';
+                }else{
+                    echo '<script>signin();</script>';
                 }
                 ?>
             </div>
