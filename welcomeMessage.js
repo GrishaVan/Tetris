@@ -28,18 +28,26 @@ function signin() {
     form.setAttribute("method", "POST");
     form.setAttribute("action", "index.php");
     var username = document.createElement("input");
+    var userLabel = document.createElement("label");
+    userLabel.innerHTML = "Username:"
+    userLabel.setAttribute("for", "logUser");
     username.setAttribute("type", "text");
     username.setAttribute("name", "logUser");
     username.setAttribute("id", "logUser");
     username.setAttribute("placeholder", "username");
     var password = document.createElement("input");
+    var passLabel = document.createElement("label");
+    passLabel.innerHTML = "Password:";
+    passLabel.setAttribute("for", "logPass");
     password.setAttribute("type", "text");
     password.setAttribute("name", "logPass");
     password.setAttribute("id", "logPass");
     password.setAttribute("placeholder", "password");
     header.after(form);
-    form.appendChild(username);
-    username.after(password);
+    form.appendChild(userLabel);
+    userLabel.after(username);
+    username.after(passLabel);
+    passLabel.after(password);
     div.style.cssText = messageStyle + "transform: translate(-50%, -200%);";
     console.log("Not logged in");
 }
