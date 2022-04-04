@@ -62,3 +62,17 @@ form > h2 {
 #submit {
     width: 170px;
 }
+div#tetris-bg {
+    margin: auto;
+    background-color: grey;
+    display: flex;
+    flex-wrap: wrap;
+    height: 600px;
+    width: 300px;
+    box-shadow: 5px 5px;
+    background-image: url("tetris-grid-bg.png");
+}
+div#tetris-bg > div {
+    height: 30px;
+    width: 30px;
+}
