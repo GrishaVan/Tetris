@@ -21,7 +21,7 @@ function loggedin(name) {
 function signin() {
     var div = document.getElementById("login");
     var header = document.createElement("h2");
-    var br = document.createElement("br");
+    const br = document.createElement("br");
     div.appendChild(header);
     header.innerHTML = "Sign in";
     var form = document.createElement("form");
@@ -45,6 +45,7 @@ function signin() {
     password.setAttribute("placeholder", "password");
     header.after(form);
     form.appendChild(userLabel);
+    userLabel.outerHTML = br;
     userLabel.after(username);
     username.after(passLabel);
     passLabel.after(password);
