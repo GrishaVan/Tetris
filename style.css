@@ -75,4 +75,6 @@ div#tetris-bg {
 div#tetris-bg > div {
     height: 30px;
     width: 30px;
+    margin: auto;
 }
+
