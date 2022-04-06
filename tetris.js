@@ -1,8 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const width = 30;
-    const height = 30;
-    const board = document.getElementsByClassName("tetris-bg");
     const tetrisGrid = Array.from(document.getElementsByClassName("block"));
+    const startButton = document.querySelector("#start-button");
+    let rows = new Array(20);
+    let timerId;
+    for(let i = 0; i < 20; i++) {
+        let row = new Array(10);
+        row.fill("");
+        rows[i] = row;
+    }
+    let score = 0;
     
     const lShape = [[1, 1], [1, 2], [1, 3], [2, 3]];
     const zShape = [[1, 1], [2, 1], [2, 2], [3, 2]];
@@ -37,8 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
             tetrisGrid[startingIndex].classList.remove("drawn");
         })
     }
-    drawPiece();
-    timerId = setInterval(moveDown, 1000);
     function moveDown() {
         removePiece();
         deltaPosition += 10;
@@ -48,13 +52,20 @@ document.addEventListener("DOMContentLoaded", () => {
     function placeBlock() {
         if(currentBlock[0].some(index => deltaPosition + (3 + index[0]) + (index[1]*10 - 10) >= 190 || tetrisGrid[deltaPosition + (3 + index[0]) + (index[1]*10)].getAttribute("id") != null)) {
             currentBlock[0].forEach(index => {
-                tetrisGrid[deltaPosition + (3 + index[0]) + (index[1]*10 - 10)].setAttribute("id", currentBlock[1]);
-                tetrisGrid[deltaPosition + (3 + index[0]) + (index[1]*10 - 10)].classList.remove("drawn");
-                tetrisGrid[deltaPosition + (3 + index[0]) + (index[1]*10 - 10)].classList.add("placed");
+                var position = deltaPosition + (3 + index[0]) + (index[1]*10 - 10);
+                tetrisGrid[position].setAttribute("id", currentBlock[1]);
+                tetrisGrid[position].classList.remove("drawn");
+                tetrisGrid[position].classList.add("placed");
+                var row = Math.floor(position/10);
+                var rowPosition = position - (row*10);
+                rows[row][rowPosition] = currentBlock[1];
             });
             currentBlock = tetrominos[Math.floor(Math.random()*tetrominos.length)];
             color = colors[Math.floor(Math.random()*colors.length)];
             deltaPosition = 0;
+            score += 1;
+            var scoreDiv = document.getElementById("sheet");
+            scoreDiv.innerHTML = score;
             drawPiece();
             gameOver();
         }
@@ -63,6 +74,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const finished = currentBlock[0].some(index => tetrisGrid[(deltaPosition + (3 + index[0]) + (index[1]*10 - 10))].classList.contains("placed"))
         if(finished) {
             clearInterval(timerId);
+            var audio = document.getElementById("audio");
+            audio.pause();
+            audio.currentTime = 0;
         }
     }
     function movePieceLeft(){
@@ -106,5 +120,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     document.addEventListener("keyup", checkKey);
+    startButton.addEventListener("click", () => {
+        if(timerId) {
+            clearInterval(timerId);
+            timerId = null;
+        }else{
+            var buttonDiv = document.getElementById("start");
+            buttonDiv.style.display = "none";
+            var scoreDiv = document.getElementById("sheet");
+            scoreDiv.innerHTML = score;
+            var audio = document.getElementById("audio");
+            audio.play();
+            drawPiece();
+            timerId = setInterval(moveDown, 200);
+        }
+    })
 })
 

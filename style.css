@@ -77,4 +77,78 @@ div#tetris-bg > div {
     width: 30px;
     margin: auto;
 }
+div#start {
+    width: 200px;
+    height: 50px;
+    background-color: blue;
+    opacity: 95%;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -200%);
+}
+button#start-button {
+    transform: translate(0, 14px);
+    background-color: red;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: 0.4s;
+}
+button#start-button:hover {
+    background-color: white;
+    color: red;
+}
+div#score {
+    width: 70px;
+    height: 70px;
+    background-color: gray;
+    text-align: center;
+    font-size: 14pt;
+    font-family: cursive;
+    margin: auto;
+    position: absolute;
+    transform: translate(900px, 0px);
+    box-shadow: 5px 5px black;
+}
+div#score > p {
+    margin: auto;
+}
+audio {
+    display: none;
+}
+div#logedin {
+    background-color: grey;
+    box-shadow: 5px 5px;
+    opacity: 95%;
+    width: 36%;
+    display: block;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -150%);
+    
+}
+div#login {
+    background-color: grey;
+    box-shadow: 5px 5px;
+    opacity: 95%;
+    width: 36%;
+    display: block;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -120%);
+}
+div#logedin > button > a {
+    text-decoration: none;
+    color: black;
+}
 
