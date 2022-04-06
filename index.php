@@ -2,6 +2,27 @@
 session_start();
 if (isset($_POST['username'])) {
     $_SESSION['name'] = $_POST['username'];
+    $host = "localhost";
+    $username = "root";
+    $password = "zx2002gv";
+    $db = "test1";
+    $conn = mysqli_connect($host, $username, $password, $db);
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }else{
+        echo "Connected successfully";
+    }
+    if(isset($_POST['yes'])) {
+        $sql = "INSERT INTO Users VALUES (".$_POST['username'].", ".$_POST['firstName'].",".$_POST['lastName'].", ".$_POST["password"].", yes);";
+    }else{
+        $sql = "INSERT INTO Users VALUES (".$_POST['username'].", ".$_POST['firstName'].",".$_POST['lastName'].", ".$_POST["password"].", noS);";
+    }
+    if(mysqli_query($conn, $sql)) {
+        echo "Inserted";
+    }else{
+        echo "error";
+    }
+    mysqli_close($conn);
 }
 ?>
 <!DOCTYPE html>
@@ -16,7 +37,7 @@ if (isset($_POST['username'])) {
         <ul class="menu">
             <li name="home" id="home"><a href="index.php">Home</a></li>
             <li name="tetris"><a href="tetris.php">Play Tetris</a></li>
-            <li name="leaderbord"><a href="leaderbord.php">Leaderboard</a></li>
+            <li name="leaderbord"><a href="leaderboard.php">Leaderboard</a></li>
         </ul>
         <div class="main">
             <script src="welcomeMessage.js">

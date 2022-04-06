@@ -151,4 +151,11 @@ div#logedin > button > a {
     text-decoration: none;
     color: black;
 }
+div#leaderboard {
+    background-color: grey;
+    box-shadow: 5px 5px black;
+    transform: translate(0px, 200px);
+    margin: auto;
+    text-align: center;
+}
 
