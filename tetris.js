@@ -10,21 +10,57 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     let score = 0;
     
-    const lShape = [[1, 1], [1, 2], [1, 3], [2, 3]];
-    const zShape = [[1, 1], [2, 1], [2, 2], [3, 2]];
-    const sShape = [[1, 2], [2, 1], [2, 2], [3, 1]];
-    const tShape = [[1, 1], [2, 1], [2, 2], [3, 1]];
-    const oShape = [[1, 1], [1, 2], [2, 1], [2, 2]];
-    const iShape = [[1, 1], [1, 2], [1, 3], [1, 4]];
+    const lShape = [
+        [[1,1], [1,2], [1,3], [2,3]],
+        [[0,1], [1,1], [2,1], [0,2]],
+        [[2,1], [2,2], [2,3], [1,1]],
+        [[2,1], [1,1], [0,1], [2,2]]
+    ];
+    const zShape = [
+        [[1,1], [2,1], [2,2], [3,2]],
+        [[2,1], [2,2], [1,2], [1,3]],
+        [[2,1], [1,1], [2,2], [3,2]],
+        [[2,2], [2,1], [1,2], [1,3]]
+    ];
+
+    const sShape = [
+        [[1,2], [2,1], [2,2], [3,1]],
+        [[1,2], [2,1], [2,2], [3,1]],
+        [[2,2], [2,1], [3,2], [3,3]],
+        [[2,2], [2,1], [3,2], [3,3]]
+    ];
+
+    const tShape = [
+        [[1,1], [2,1], [2,2], [3,1]],
+        [[2,1], [2,2], [2,3], [3,2]],
+        [[1,2], [2,2], [2,1], [3,2]],
+        [[2,1], [2,2], [2,3], [1,2]],
+    ];
+
+    const oShape = [
+        [[1,1], [1,2], [2,1], [2,2]],
+        [[1,1], [1,2], [2,1], [2,2]],
+        [[1,1], [1,2], [2,1], [2,2]],
+        [[1,1], [1,2], [2,1], [2,2]]
+    ];
+
+    const iShape = [
+        [[1,1], [1,2], [1,3], [1,4]],
+        [[1,1], [2,1], [3,1], [4,1]],
+        [[1,1], [1,2], [1,3], [1,4]],
+        [[1,1], [2,1], [3,1], [4,1]],
+    ];
+
     const tetrominos = [[lShape, "l"], [zShape, "z"], [sShape, "s"], [tShape, "t"], [oShape, "o"], [iShape, "i"]];
     const colors = ["lightblue", "darkblue", "orange", "yellow", "green", "red", "magenta"];
     let currentBlock = tetrominos[Math.floor(Math.random()*tetrominos.length)];
     let color = colors[Math.floor(Math.random()*colors.length)];
     let deltaPosition = 0;
     let deltaTranslate = 0;
+    let currentRotation = 0;
 
     function drawPiece() {
-        currentBlock[0].forEach(index => {
+        currentBlock[0][currentRotation].forEach(index => {
             var startingIndex = deltaPosition + (3 + index[0]) + (index[1]*10 - 10);
             tetrisGrid[startingIndex].classList.add("drawn");
         })
@@ -37,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     function removePiece() {
-        currentBlock[0].forEach(index => {
+        currentBlock[0][currentRotation].forEach(index => {
             var startingIndex = deltaPosition + (3 + index[0]) + (index[1]*10 - 10);
             tetrisGrid[startingIndex].removeAttribute("style");
             tetrisGrid[startingIndex].classList.remove("drawn");
@@ -50,8 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
         placeBlock();
     }
     function placeBlock() {
-        if(currentBlock[0].some(index => deltaPosition + (3 + index[0]) + (index[1]*10 - 10) >= 190 || tetrisGrid[deltaPosition + (3 + index[0]) + (index[1]*10)].getAttribute("id") != null)) {
-            currentBlock[0].forEach(index => {
+        if(currentBlock[0][currentRotation].some(index => deltaPosition + (3 + index[0]) + (index[1]*10 - 10) >= 190 || tetrisGrid[deltaPosition + (3 + index[0]) + (index[1]*10)].getAttribute("id") != null)) {
+            currentBlock[0][currentRotation].forEach(index => {
                 var position = deltaPosition + (3 + index[0]) + (index[1]*10 - 10);
                 tetrisGrid[position].setAttribute("id", currentBlock[1]);
                 tetrisGrid[position].classList.remove("drawn");
@@ -64,6 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
             color = colors[Math.floor(Math.random()*colors.length)];
             deltaPosition = 0;
             score += 1;
+            currentRotation = 0;
             var scoreDiv = document.getElementById("sheet");
             scoreDiv.innerHTML = score;
             drawPiece();
@@ -71,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     function gameOver() {
-        const finished = currentBlock[0].some(index => tetrisGrid[(deltaPosition + (3 + index[0]) + (index[1]*10 - 10))].classList.contains("placed"))
+        const finished = currentBlock[0][currentRotation].some(index => tetrisGrid[(deltaPosition + (3 + index[0]) + (index[1]*10 - 10))].classList.contains("placed"))
         if(finished) {
             clearInterval(timerId);
             var audio = document.getElementById("audio");
@@ -93,9 +130,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     function movePieceLeft(){
-        const boundry = currentBlock[0].some(index => (deltaPosition + (3 + index[0]) + (index[1]*10 - 10)) % 10 === 0)
-        const takenBlock = currentBlock[0].some(index => tetrisGrid[((deltaPosition - 1) + (3 + index[0]) + (index[1]*10 - 10))].classList.contains("placed"))
-        const takenDiogonal = currentBlock[0].some(index => tetrisGrid[((deltaPosition - 1) + (3 + index[0]) + (index[1]*10))].classList.contains("placed"))
+        const boundry = currentBlock[0][currentRotation].some(index => (deltaPosition + (3 + index[0]) + (index[1]*10 - 10)) % 10 === 0)
+        const takenBlock = currentBlock[0][currentRotation].some(index => tetrisGrid[((deltaPosition - 1) + (3 + index[0]) + (index[1]*10 - 10))].classList.contains("placed"))
+        const takenDiogonal = currentBlock[0][currentRotation].some(index => tetrisGrid[((deltaPosition - 1) + (3 + index[0]) + (index[1]*10))].classList.contains("placed"))
         var blocks = document.getElementsByClassName("block drawn");
         removePiece();
         if(!boundry && !takenBlock && !takenDiogonal) {
@@ -109,9 +146,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     function movePieceRight(){
         var multiplier = 9;
-        const boundry = currentBlock[0].some(index => (deltaPosition + (3 + index[0]) + (index[1]*10 - 10)) % 10 === multiplier%10)
-        const takenBlock = currentBlock[0].some(index => tetrisGrid[((deltaPosition + 1) + (3 + index[0]) + (index[1]*10 - 10))].classList.contains("placed"))
-        const takenDiogonal = currentBlock[0].some(index => tetrisGrid[((deltaPosition + 1) + (3 + index[0]) + (index[1]*10))].classList.contains("placed"))
+        const boundry = currentBlock[0][currentRotation].some(index => (deltaPosition + (3 + index[0]) + (index[1]*10 - 10)) % 10 === multiplier%10)
+        const takenBlock = currentBlock[0][currentRotation].some(index => tetrisGrid[((deltaPosition + 1) + (3 + index[0]) + (index[1]*10 - 10))].classList.contains("placed"))
+        const takenDiogonal = currentBlock[0][currentRotation].some(index => tetrisGrid[((deltaPosition + 1) + (3 + index[0]) + (index[1]*10))].classList.contains("placed"))
         var blocks = document.getElementsByClassName("block drawn");
         removePiece();
         if(!boundry && !takenBlock && !takenDiogonal) {
@@ -124,6 +161,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         drawPiece();
     }
+    function rotatePiece() {
+        removePiece();
+        currentRotation++;
+        if(currentRotation > 3) {
+            currentRotation = 0;
+        }
+        drawPiece();
+    }
     function checkKey(e) {
         if(e.keyCode === 37) {
             movePieceLeft();
@@ -133,6 +178,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if(e.keyCode === 40) {
             moveDown();
+        }
+        if (e.keyCode == 38) {
+            rotatePiece();
         }
     }
     document.addEventListener("keyup", checkKey);
@@ -147,6 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
             scoreDiv.innerHTML = score;
             var audio = document.getElementById("audio");
             audio.play();
+            audio.loop = true;
             drawPiece();
             timerId = setInterval(moveDown, 1000);
         }
