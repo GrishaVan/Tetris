@@ -30,7 +30,7 @@ the loading page, and the page with the Tetris game. **Not fully completed Tetri
 ### License
 Copyright (c) [2020] [Grygoriy Vanetsyan]
 Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files "covid19-dashboard", to deal
+of this software and associated documentation files "ECM1417 Tetris", to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
