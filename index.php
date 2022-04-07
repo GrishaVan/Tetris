@@ -41,7 +41,7 @@ if (isset($_POST['username'])) {
         </ul>
         <div class="main">
             <div id="logedin">
-                <h2>Welcome to Tetris!</h2>
+                <h2>Welcome to Tetris</h2>
                 <p><?php echo $_SESSION['name'];?></p>
                 <button><a href="tetris.php">Click here to play</a></button>
             </div>
