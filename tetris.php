@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,6 +28,13 @@
             <audio id="audio" controls>
                 <source src="tetris.mp3" type="audio/mpeg">
             </audio>
+            <div id="send-score">
+                <form method="POST" action="leaderboard.php">
+                    <p>Check the leaderboards</p>
+                    <p>Your score is:</p>
+                    <input type="submit" name="submit" id="submit">
+                </form>
+            </div>
             <div id="tetris-bg">
                 <div class="block"></div>
                 <div class="block"></div>

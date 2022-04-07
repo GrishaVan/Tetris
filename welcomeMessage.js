@@ -3,6 +3,6 @@ function loggedIn() {
     welcome.style.display = "none";
 }
 function notLoggedIn() {
-    var login = document.getElementById("loggedin");
+    var login = document.getElementById("logedin");
     login.style.display = "none";
 }

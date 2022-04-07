@@ -156,6 +156,32 @@ div#leaderboard {
     box-shadow: 5px 5px black;
     transform: translate(0px, 200px);
     margin: auto;
+    height: fit-content;
+    width: fit-content;
     text-align: center;
+}
+div#send-score {
+    width: 300px;
+    height: 220px;
+    color: red;
+    background-color: blue;
+    text-align: center;
+    font-size: 14pt;
+    font-family: cursive;
+    margin: auto;
+    position: absolute;
+    box-shadow: 5px 5px black;
+    transform: translate(520px, 200px);
+    display: none;
+}
+table, td {
+    border-spacing: 2px;
+    border: 1px solid;
+    border-collapse: collapse;
+    width: 1000px;
+}
+th {
+    border: 1px solid;
+    background-color: blue;
 }
 

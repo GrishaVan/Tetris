@@ -31,9 +31,9 @@ session_start();
                 <input type="password" name="confPassword" id="confPassword" placeholder="Confirm password" required><br>
                 <label for="display">Display Scores on leaderboard:</label><br>
                 <input type="radio" name="display" id="yes" value="yes" checked>
-                <label for="yes">Yes</label><br>
+                <label for="yes">yes</label><br>
                 <input type="radio" name="display" id="no">
-                <label for="no">No</label><br>
+                <label for="no">no</label><br>
                 <input type="submit" name="submit" id="submit">
             </form>
         <script src="checkPassword.js"></script>

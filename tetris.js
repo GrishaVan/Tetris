@@ -77,6 +77,19 @@ document.addEventListener("DOMContentLoaded", () => {
             var audio = document.getElementById("audio");
             audio.pause();
             audio.currentTime = 0;
+            var scoreSend = document.getElementById("send-score");
+            scoreSend.style.display = "block";
+            var finalScore = document.createElement("input");
+            finalScore.setAttribute("type", "text");
+            finalScore.setAttribute("value", score);
+            finalScore.setAttribute("name", "score");
+            finalScore.style.backgroundColor = "blue";
+            finalScore.style.fontFamily = "cursive";
+            finalScore.style.fontSize = "14pt";
+            finalScore.style.color = "red";
+            finalScore.style.textAlign = "center";
+            var submit = document.getElementById("submit");
+            submit.before(finalScore);
         }
     }
     function movePieceLeft(){
@@ -118,6 +131,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if(e.keyCode === 39)  {
             movePieceRight();
         }
+        if(e.keyCode === 40) {
+            moveDown();
+        }
     }
     document.addEventListener("keyup", checkKey);
     startButton.addEventListener("click", () => {
@@ -132,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
             var audio = document.getElementById("audio");
             audio.play();
             drawPiece();
-            timerId = setInterval(moveDown, 200);
+            timerId = setInterval(moveDown, 1000);
         }
     })
 })

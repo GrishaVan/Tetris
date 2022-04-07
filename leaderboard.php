@@ -1,3 +1,18 @@
+<?php
+session_start();
+if(isset($_POST['score'])) {
+    $host = "localhost";
+    $username = "root";
+    $password = "zx2002gv";
+    $db = "tetris";
+    $conn1 = mysqli_connect($host, $username, $password, $db);
+    if (!$conn1) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    $sql1 = "INSERT INTO Scores VALUES (NULL, \"".$_SESSION['name']."\", ".$_POST['score'].");";
+    $result1 = mysqli_query($conn1, $sql1);
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,17 +33,15 @@
                     $host = "localhost";
                     $username = "root";
                     $password = "zx2002gv";
-                    $db = "test1";
-                    $conn1 = mysqli_connect($host, $username, $password, $db);
-                    if (!$conn1) {
+                    $db = "tetris";
+                    $conn = mysqli_connect($host, $username, $password, $db);
+                    if (!$conn) {
                         die("Connection failed: " . mysqli_connect_error());
-                    }else{
-                        echo "Connected successfully";
                     }
-                    $sql1 = "SELECT * FROM Scores;";
-                    $result = mysqli_query($conn1, $sql1);
+                    $sql = "SELECT * FROM Users WHERE `Display` = 1";
+                    $result = mysqli_query($conn, $sql);
                 ?>
-                <table border="1" cellspacing="0" padding="10">
+                <table id="leaderboard">
                     <tr>
                         <th>Username</th>
                         <th>Score</th>
@@ -36,10 +49,14 @@
                     <?php
                         if(mysqli_num_rows($result) > 0) {
                             while($data = mysqli_fetch_assoc($result)) {
+                                $sql1 = "SELECT * FROM Scores WHERE `Username` = \"".$data['UserName']."\"";
+                                $result1 = mysqli_query($conn, $sql1);
+                                if(mysqli_num_rows($result1) > 0) {
+                                    while($data1 = mysqli_fetch_assoc($result1)) {
                     ?>
                     <tr>
-                        <td><?php echo $data['Username']?></td>
-                        <td><?php echo $data['Score']?></td>
+                        <td><?php echo $data1['Username']?></td>
+                        <td><?php echo $data1['Score']?></td>
                     </tr>
                     <?php
                             }
@@ -48,7 +65,7 @@
                     <tr>
                         <td colspan="8">No data found</td>
                     </tr>
-                    <?php } ?>
+                    <?php } }}?>
                 </table>
             </div>
         </div>
